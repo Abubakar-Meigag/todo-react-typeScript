@@ -2,7 +2,7 @@ import TodoList from "../todoList/TodoList";
 
 const Home = () => {
   return (
-    <div className="flex flex-col w-full justify-center items-center max-w-3xl mx-auto text-center">
+    <div className="flex flex-col h-full max-w-3xl mx-auto text-center">
       <div className="relative inline-block mt-16">
         <span className="text-8xl md:text-7xl font-bold">
           Add Todo List App
