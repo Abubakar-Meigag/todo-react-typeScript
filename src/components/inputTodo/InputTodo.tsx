@@ -9,11 +9,10 @@ const InputTodo: React.FC = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+    e.preventDefault();
+
     if (description.trim().length === 0 || description.trim().length < 3) {
-      alert(
-        "Description must not be empty and should contain at least 3 characters."
-      );
+      alert("Description must not be empty and should contain at least 3 characters.");
       return;
     }
 
@@ -30,11 +29,13 @@ const InputTodo: React.FC = () => {
       console.error(err.message);
     }
   };
-  
 
   return (
     <div className="w-screen">
-      <form onSubmit={handleSubmit} className="flex justify-center gap-x-2 mt-32">
+      <form
+        onSubmit={handleSubmit}
+        className="flex justify-center gap-x-2 mt-32"
+      >
         <input
           className="flex justify-center items-center border border-solid rounded-md border-b-emerald-100
                md:w-[550px] sm:w-fit text-2xl px-2 py-2"
@@ -56,32 +57,23 @@ const InputTodo: React.FC = () => {
 
 export default InputTodo;
 
+//   const addTodo = async () => {
 
+//     if (description.trim().length === 0 || description.trim().length < 3) {
+//       alert("Description must not be empty and should contain at least 3 characters.");
+//       return;
+//     }
 
+//     const url: string = "https://beko-todo-app.onrender.com/todo";
 
-
-
-
-
-
-
-  //   const addTodo = async () => {
-
-  //     if (description.trim().length === 0 || description.trim().length < 3) {
-  //       alert("Description must not be empty and should contain at least 3 characters.");
-  //       return;
-  //     }
-
-  //     const url: string = "https://beko-todo-app.onrender.com/todo";
-
-  //     try {
-  //       const res = await axios.post(url, { description });
-  //       if (res.status !== 201) {
-  //         throw new Error("Something went wrong");
-  //       }
-  //       setDescription("");
-  //       window.location.href = "/";
-  //     } catch (error: any) {
-  //       console.error(error.message);
-  //     }
-  //   };
+//     try {
+//       const res = await axios.post(url, { description });
+//       if (res.status !== 201) {
+//         throw new Error("Something went wrong");
+//       }
+//       setDescription("");
+//       window.location.href = "/";
+//     } catch (error: any) {
+//       console.error(error.message);
+//     }
+//   };
