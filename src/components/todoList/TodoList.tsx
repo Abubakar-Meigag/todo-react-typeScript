@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import data from "../.././database/data.json";
 import InputTodo from "../inputTodo/InputTodo";
 import axios from "axios";
 
@@ -14,7 +13,7 @@ const TodoList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const getData= async () => {
-      const url = 'https://beko-todo-app.onrender.com/todo'
+      const url: string = 'https://beko-todo-app.onrender.com/todo'
 
       try {
          let res = await axios.get(url);
@@ -22,7 +21,7 @@ const TodoList: React.FC = () => {
             throw new Error('Network response was not ok');
           }
          
-          setTodoList(res.data);   
+          setTodoList(res.data);
       } catch (error: unknown) {
             if (error instanceof Error){
               setError(error.message)  
@@ -41,6 +40,7 @@ const TodoList: React.FC = () => {
             const deleteTodoElement = await axios.delete(`https://beko-todo-app.onrender.com/todo/${id}`)
                if (deleteTodoElement.status === 200) {
                   setTodoList(prevTodoList => prevTodoList.filter(todo => todo.id !== id));
+                  window.location.href = "/";
                   console.log(deleteTodoElement);
               } else {
                   throw new Error('Failed to delete the todo');
@@ -76,7 +76,7 @@ const TodoList: React.FC = () => {
 
           <tbody className="divide-y divide-gray-200">
             {todoList.map((todo: any) => 
-                  <tr key={todo.id}>
+                  <tr key={todo.todo_id}>
                   <td className="px-6 text-2xl py-4 whitespace-nowrap text-neutral-100">{todo.todo_id}</td>
                   <td className="px-6 text-2xl font-semibold py-4 whitespace-nowrap text-neutral-100">{todo.description}</td>
 
