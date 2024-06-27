@@ -1,5 +1,3 @@
 https://beko-todo-app.onrender.com/todo
 
-https://beko-todo-app.onrender.com/todo
-
 https://beko-todo-app.onrender.com/todo/${todo.todo_id}
