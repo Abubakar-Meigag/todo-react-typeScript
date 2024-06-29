@@ -1,5 +1,5 @@
-// import axios from "axios";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 const InputTodo: React.FC = () => {
   const [description, setDescription] = useState<string>("");
@@ -23,10 +23,11 @@ const InputTodo: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.warn(res);
-      window.location.href = "/";
+      toast.success('You add todo successfully')
     } catch (err: any) {
       console.error(err.message);
+    } finally {
+      window.location.href = "/";
     }
   };
 
