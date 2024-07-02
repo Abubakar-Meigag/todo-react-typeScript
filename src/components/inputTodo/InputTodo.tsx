@@ -12,7 +12,7 @@ const InputTodo: React.FC = () => {
     e.preventDefault();
 
     if (description.trim().length === 0 || description.trim().length < 3) {
-      alert("Description must not be empty and should contain at least 3 characters.");
+      toast.error('Description must not be empty and should contain at least 3 characters.')
       return;
     }
 
