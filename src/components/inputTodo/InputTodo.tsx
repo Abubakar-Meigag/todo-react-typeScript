@@ -21,9 +21,11 @@ const InputTodo: React.FC = () => {
       const res = await fetch("https://beko-todo-app.onrender.com/todo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body),        
       });
       toast.success('You add todo successfully')
+      console.log(res, 'You add todo successfully');
+      
     } catch (err: any) {
       console.error(err.message);
     } finally {
