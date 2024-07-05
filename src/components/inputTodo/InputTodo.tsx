@@ -1,7 +1,16 @@
 import React, { ChangeEvent, FormEvent, useState } from "react"; 
 import toast from "react-hot-toast";
 
-const InputTodo: React.FC = () => {
+interface Todo {
+  todo_id: number;
+  description: string;
+}
+
+interface InputTodoProps {
+  addTodo: (newTodo: Todo) => void;
+}
+
+const InputTodo: React.FC<InputTodoProps> = ({ addTodo }) => {
   const [description, setDescription] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +21,7 @@ const InputTodo: React.FC = () => {
     e.preventDefault();
 
     if (description.trim().length === 0 || description.trim().length < 3) {
-      toast.error('Description must not be empty and should contain at least 3 characters.')
+      toast.error('Description must not be empty and should contain at least 3 characters.');
       return;
     }
 
@@ -21,16 +30,27 @@ const InputTodo: React.FC = () => {
       const res = await fetch("https://beko-todo-app.onrender.com/todo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),        
+        body: JSON.stringify(body),
       });
-      toast.success('You add todo successfully')
-      console.log(res, 'You add todo successfully');
+
+      if (res.ok) {
+        const result = await res.json();
+        const newTodo = result.rows ? result.rows[0] : null;
+        if (newTodo && newTodo.todo_id) {
+          addTodo(newTodo);
+          toast.success('You added a todo successfully');
+          setDescription("");
+        } else {
+          toast.error('Failed to add todo - invalid response from server');
+        }
+      } else {
+        toast.error('Failed to add todo');
+      }
       
     } catch (err: any) {
       console.error(err.message);
-    } finally {
-      window.location.href = "/";
-    }
+      toast.error('An error occurred');
+    } 
   };
 
   return (
@@ -59,24 +79,3 @@ const InputTodo: React.FC = () => {
 };
 
 export default InputTodo;
-
-//   const addTodo = async () => {
-
-//     if (description.trim().length === 0 || description.trim().length < 3) {
-//       alert("Description must not be empty and should contain at least 3 characters.");
-//       return;
-//     }
-
-//     const url: string = "https://beko-todo-app.onrender.com/todo";
-
-//     try {
-//       const res = await axios.post(url, { description });
-//       if (res.status !== 201) {
-//         throw new Error("Something went wrong");
-//       }
-//       setDescription("");
-//       window.location.href = "/";
-//     } catch (error: any) {
-//       console.error(error.message);
-//     }
-//   };

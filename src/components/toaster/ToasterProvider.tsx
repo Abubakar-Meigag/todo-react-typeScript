@@ -7,7 +7,9 @@ const ToasterProvider = () => {
       toastOptions={{
             style: {
                   background: '#333',
-                  color: '#fff'
+                  color: '#fff',
+                  padding: '20px 10px',
+                  fontStyle:'semibold-bold'
             }
       }}
     
