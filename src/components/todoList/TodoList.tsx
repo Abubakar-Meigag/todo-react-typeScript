@@ -24,10 +24,8 @@ const TodoList: React.FC = () => {
       }
 
       setTodoList(res.data);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
+    } catch (error: any) {
         setError(error.message);
-      }
     } finally {
       setLoading(false);
     }
