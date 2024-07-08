@@ -17,6 +17,8 @@ const Edit = () => {
         console.error(err)
     }
   }
+
+  
   fetchData();
 
   return (
