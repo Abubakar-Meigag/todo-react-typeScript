@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InputTodo from "../inputTodo/InputTodo";
 import axios from "axios";
+import Edit from "../edit/Edit";
 
 interface Todo {
   todo_id: number;
@@ -81,15 +82,15 @@ const TodoList: React.FC = () => {
                 <td className="px-6 text-2xl font-semibold py-4 whitespace-nowrap text-neutral-100">{todo.description}</td>
                 <td>
                   <button
-                    className="px-4 py-3 text-xl font-semibold text-black bg-yellow-500 rounded-md hover:bg-amber-200 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
+                    className="text-xl font-semibold text-black bg-yellow-500 rounded-md hover:bg-amber-200 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
                     onClick={() => {}}
                   >
-                    Edit
+                    <Edit />
                   </button>
                 </td>
                 <td>
                   <button
-                    className="ml-2 px-4 py-2 text-xl font-semibold text-neutral-100 bg-red-600 rounded-md hover:bg-red-400 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
+                    className="px-4 py-2 text-xl font-semibold text-neutral-100 bg-red-600 rounded-md hover:bg-red-400 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
                     onClick={() => deleteTodo(todo.todo_id)}
                   >
                     Delete
