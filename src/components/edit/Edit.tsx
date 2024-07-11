@@ -1,10 +1,38 @@
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import toast from "react-hot-toast";
 
 
+interface EditTodoProps {
+  todo_id: number;
+  description: string;
+}
 
-export default function Edit() {
-  let [isOpen, setIsOpen] = useState(false)
+
+const  Edit: React.FC<EditTodoProps> = ({ todo_id, description }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [updatingTodo, setUpdatingTodo] = useState(description);
+  const handelChange = (e: ChangeEvent<HTMLInputElement>) => setUpdatingTodo(e.target.value);
+  const handelNoChange = () => setUpdatingTodo(description);
+
+  const updateTodo = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    try {
+      const body = { description };
+      const res = await fetch(
+        `https://beko-todo-app.onrender.com/todo/${todo_id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
+      
+    } catch (err: any) {
+        console.error(err.message)
+    }
+  }
 
   function open() {
     setIsOpen(true)
@@ -38,7 +66,7 @@ export default function Edit() {
               <div className="mt-4 gap-2">
                 <Button
                   className="inline-flex items-center gap-2 mr-2 cursor-pointer rounded-md bg-yellow-500 py-2 px-3 font-semibold text-gray-900 hover:text-red-500 text-xl shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                  onClick={close}
+                  onClick={() => {}}
                 >
                   Edit
                 </Button>
@@ -56,3 +84,5 @@ export default function Edit() {
     </>
   )
 }
+
+export default Edit;

@@ -14,7 +14,7 @@ const TodoList: React.FC = () => {
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  
   const getData = async () => {
     const url: string = 'https://beko-todo-app.onrender.com/todo';
 
@@ -85,7 +85,7 @@ const TodoList: React.FC = () => {
                     className="text-xl font-semibold text-black bg-yellow-500 rounded-md hover:bg-amber-200 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
                     onClick={() => {}}
                   >
-                    <Edit />
+                    <Edit key={todo.todo_id} todo_id={todo.todo_id} description={todo.description} />
                   </button>
                 </td>
                 <td>
